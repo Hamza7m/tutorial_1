@@ -1,4 +1,9 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:tutorial_1/compenent/card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,72 +17,53 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  int corba = 1;
+  int yemek = 1;
+  int tatli = 1;
+  List<String> corbalar = ["corba1", "corba2", "corba3", "corba4", "corba5"];
+  List<String> yemekler = ["yemek1", "yemek2", "yemek3", "yemek4", "yemek5"];
+  List<String> tatliler = ["tatli1", "tatli2", "tatli3", "tatli4", "tatli5"];
+  @override
+  void yenileme() {
+    setState(() {
+      corba = Random().nextInt(5) + 1;
+      yemek = Random().nextInt(5) + 1;
+      tatli = Random().nextInt(5) + 1;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: true, // gelistirma agsama
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("flutter kahvasi  "),
-          centerTitle: true,
-        ),
-        body: Center(
-            child: Container(
-          height: 500,
-          width: 400,
-          decoration: BoxDecoration(
-            color: Colors.brown[500],
-          ),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 50,
+        debugShowCheckedModeBanner: true,
+        title: 'Menue',
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text('Yemek menuesi '),
+              backgroundColor: Colors.indigo,
+            ),
+            body: Column(children: [
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: yenileme,
+                    child: Image.asset('assets/corbalar/corba${corba}.jpg')),
               ),
-              CircleAvatar(
-                radius: 90,
-                backgroundImage: AssetImage('assets/Images/Kahve.jpg'),
-                backgroundColor: Colors.brown,
+              Text(corbalar[corba-1]),
+              Divider(),
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: yenileme,
+                    child: Image.asset('assets/yemekler/yamek${yemek}.jpg')),
               ),
-              SizedBox(
-                height: 20,
+              Text(yemekler[yemek-1]),
+              Divider(),
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: yenileme,
+                    child: Image.asset('assets/tatliler/tatli${tatli}.jpg')),
               ),
-              Text(
-                "Flutter Kahvasi ",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 40.50),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.message),
-                        Text("your messge here "),
-                      ]),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Card(
-                margin: EdgeInsets.symmetric(horizontal: 40.50),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.phone),
-                        Text("+90 555 232 222"),
-                      ]),
-                ),
-              )
-            ],
-          ),
-        )),
-      ),
-    );
+              Text(tatliler[tatli - 1]),
+              Divider(),
+            ])));
   }
 }
